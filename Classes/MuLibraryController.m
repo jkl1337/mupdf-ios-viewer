@@ -30,7 +30,7 @@ static void showAlert(NSString *msg, NSString *filename)
 	NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
 	self.title = [NSString stringWithFormat: @"%@ %@ Documents", name, version];
 	[self reload];
-	timer = [NSTimer timerWithTimeInterval: 3
+	timer = [NSTimer timerWithTimeInterval: 6
 		target: self selector: @selector(reload) userInfo: nil
 		repeats: YES];
 	[[NSRunLoop currentRunLoop] addTimer: timer forMode: NSDefaultRunLoopMode];
@@ -63,6 +63,7 @@ static void showAlert(NSString *msg, NSString *filename)
 		}
 	}
 
+	[outfiles sortUsingSelector:@selector(caseInsensitiveCompare:)];
 	files = outfiles;
 
 	[self.tableView reloadData];
